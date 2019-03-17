@@ -36,12 +36,12 @@ def uncross(request, list_id):
 
 def edit(request , list_id):
     if request.method == 'POST':
-        item = List.object.get(pk=list_id)
+        item = List.objects.get(pk=list_id)
         form = ListForm(request.POST or None,instance=item)
         if form.is_valid():
             form.save()
             messages.success(request,('Item has been Edited'))
             return redirect('home')
     else:
-        items = List.objects.get(pk=list_id)
-        return render(request,'edit.html' , {'items':items})
+        item = List.objects.get(pk=list_id)
+        return render(request,'edit.html' , {'item':item})
